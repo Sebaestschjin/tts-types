@@ -404,6 +404,9 @@ function Container.getData() end
 ---@return nil | tts__Object_Decal[]
 function Object.getDecals() end
 
+---@return string
+function Object.getDescription() end
+
 ---
 --- Object's unique identifier.
 ---@return string
@@ -792,6 +795,10 @@ end
 
 ---@return tts__Object[]
 function getAllObjects()
+end
+
+---@return tts__Object[]
+function getObjects()
 end
 
 ---@class tts__Global : tts__Object
