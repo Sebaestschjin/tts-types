@@ -1,4 +1,4 @@
----@alias tts__ObjectType "3D Text" | "Backgammon Piece" | "Bag" | "Block" | "Board" | "Calculator" | "Card" | "Checker" | "Chess" | "Chip" | "Clock" | "Coin" | "Counter" | "Deck" | "Dice" | "Domino" | "Figurine" | "Fog" | "FogOfWar" | "GoPiece" | "Hand" | "Infinite" | "InventoryBackground" | "InventoryBotBG" | "InventoryItemBlank" | "InventoryTopBG" | "Mp3" | "Notecard" | "Jigsaw" | "Jigsaw Box" | "Pointer" | "Randomize" | "rpgFigurine" | "Scripting" | "Stack" | "Superfight" | "Surface" | "Tablet" | "Tileset" | "VR UI"
+---@alias tts__ObjectType "3D Text" | "Backgammon Piece" | "Bag" | "Block" | "Board" | "Calculator" | "Card" | "Checker" | "Chess" | "Chip" | "Clock" | "Coin" | "Counter" | "Deck" | "Dice" | "Domino" | "Figurine" | "Fog" | "FogOfWar" | "GoPiece" | "Hand" | "Infinite" | "InventoryBackground" | "InventoryBotBG" | "InventoryItemBlank" | "InventoryTopBG" | "Mp3" | "Notecard" | "Jigsaw" | "Jigsaw Box" | "Pointer" | "Randomize" | "rpgFigurine" | "Scripting" | "Stack" | "Superfight" | "Surface" | "Tablet" | "Tile" | "Tileset" | "VR UI"
 
 ---@alias tts__JointType "Fixed" | "Hinge" | "Spring"
 
@@ -54,6 +54,7 @@
 ---@field static_friction number
 ---@field sticky boolean
 ---@field tag tts__ObjectType @An identifier indicating the type of Tabletop Simulator object. [Read only]
+---@field type tts__ObjectType @An identifier indicating the type of Tabletop Simulator object. [Read only]
 ---@field tooltip boolean
 ---@field UI tts__UI @[Read only]
 ---@field use_gravity boolean
@@ -180,12 +181,18 @@ local Token
 ---@return true @Technically, returns false if your `callback` param is nil. However, Luanalysis won't allow you to make that mistake.
 function Object.addContextMenuItem(label, callback, keepOpen) end
 
+---@overload fun(functionName: string): any
+---@param functionName string
+---@param functionParameters table | number | string | boolean
+---@return any
+function Object.call(functionName, functionParameters) end
+
 ---@return true
 function Object.clearContextMenu() end
 
 ---@shape tts__ButtonParameters
 ---@field click_function string @A String of the function's name that will be run when button is clicked.
----@field function_owner nil | string @The Object which contains the click_function function. Defaults to Global>
+---@field function_owner nil | string | tts__Self @The Object which contains the click_function function. Defaults to Global>
 ---@field label nil | string @Text that appears on the button. Defaults to ''.
 ---@field position nil | tts__VectorShape @Where the button appears, relative to the Object's center.
 ---@field rotation nil | tts__VectorShape @How the button is rotated, relative to the Object's rotation. Defaults to {x=0, y=0, z=0}.
@@ -198,6 +205,36 @@ function Object.clearContextMenu() end
 ---@field hover_color nil | tts__ColorShape @A Color for the background during mouse-over.
 ---@field press_color nil | tts__ColorShape @A Color for the background when clicked.
 ---@field tooltip nil | string @Popup of text, similar to how an Object's name is displayed on mouseover.  Defaults to ''.
+
+---@shape tts__InputParameters
+---@field input_function nil | string @The function's name that will be run when the input is selected.
+---@field function_owner nil | string | tts__Self @The Object which contains the input_function function.
+---@field label nil | string @Text that appears as greyed out text when there is no value in the input.
+---@field position nil | tts__VectorShape @Where the input appears, relative to the Object's center.
+---@field rotation nil | tts__VectorShape @How the input is rotated, relative to the Object's rotation.
+---@field scale nil | tts__VectorShape @Scale of the input, relative to the Object's scale.
+---@field width nil | number @How wide the input will be, relative to the Object.
+---@field height nil | number @How tall the input will be, relative to the Object.
+---@field font_size nil | number @Size the label/value font will be, relative to the Object.
+---@field color nil | tts__ColorShape @A Color for the input's background.
+---@field font_color nil | tts__ColorShape @A Color for the value text.
+---@field tooltip nil | string @A popup of text, similar to how an Object's name is displayed on mouseover.
+---@field alignment nil | tts__Input_Alignment @How text is aligned in the input box.
+---@field value nil | string | number @A String of the text entered into the input.
+---@field validation nil | tts__Input_Validation @An Int which determines what characters can be input into the value.
+---@field tab nil | tts__Input_Tab @An Int which determines how pressing tab is handled when inputting.
+
+--- Automatic | Left | Center | Right | Justified
+---@alias tts__Input_Alignment 1 | 2 | 3 | 4 | 5
+
+--- None | Integer | Float | Alphanumeric | Username | Name
+---@alias tts__Input_Validation 1 | 2 | 3 | 4 | 5 | 6
+
+--- None | Select Next Input | Indent
+---@alias tts__Input_Tab 1 | 2 | 3
+
+---@shape tts__EditInputParameters : tts__InputParameters
+---@field index number
 
 ---
 --- Removes all buttons from the object.
@@ -244,6 +281,13 @@ function Object.destruct() end
 ---@param parameters tts__EditButtonParameters
 ---@return boolean
 function Object.editButton(parameters) end
+
+--- Modify an existing input. The only parameter that is required is the index. The rest are optional, and not using them will cause the edited input's element to remain.
+---
+--- Indexes start at 0. The first input on any given Object has an index of 0, the next input on it has an index of 1, etc. Each Object has its own indexes.
+---@param parameters tts__EditInputParameters
+---@return boolean
+function Object.editInput(parameters) end
 
 ---
 --- Returns the object's angular velocity, in radians per second.
@@ -404,7 +448,7 @@ function Container.getData() end
 ---@return nil | tts__Object_Decal[]
 function Object.getDecals() end
 
----@return string
+---@return string @Description, also shows as part of Object's tooltip.
 function Object.getDescription() end
 
 ---
@@ -412,8 +456,33 @@ function Object.getDescription() end
 ---@return string
 function Object.getGUID() end
 
+--- Game Master Notes only visible for Player Color Black.
+---@return string
+function Object.getGMNotes() end
+
 ---@return nil | tts__Color
 function Object.getHighlightColor() end
+
+---@shape tts__Input
+---@field input_function string @The function's name that will be run when the input is selected.
+---@field function_owner string | tts__Self @The Object which contains the input_function function.
+---@field label string @Text that appears as greyed out text when there is no value in the input.
+---@field position tts__VectorShape @Where the input appears, relative to the Object's center.
+---@field rotation tts__VectorShape @How the input is rotated, relative to the Object's rotation.
+---@field scale tts__VectorShape @Scale of the input, relative to the Object's scale.
+---@field width number @How wide the input will be, relative to the Object.
+---@field height number @How tall the input will be, relative to the Object.
+---@field font_size number @Size the label/value font will be, relative to the Object.
+---@field color tts__ColorShape @A Color for the input's background.
+---@field font_color tts__ColorShape @A Color for the value text.
+---@field tooltip string @A popup of text, similar to how an Object's name is displayed on mouseover.
+---@field alignment tts__Input_Alignment @How text is aligned in the input box.
+---@field value string @A String of the text entered into the input.
+---@field validation tts__Input_Validation @An Int which determines what characters can be input into the value.
+---@field tab tts__Input_Tab @An Int which determines how pressing tab is handled when inputting.
+
+---@return tts__Input[]
+function Object.getInputs() end
 
 ---
 --- Returns object's data (saved state) serialized into a JSON encoded string.
@@ -522,6 +591,10 @@ function Object.getScale() end
 --- Returns an array of snap points.
 ---@return tts__Object_SnapPoint[]
 function Object.getSnapPoints() end
+
+---@param name string @Data value of a variable in another Object's script. Can only return a table.
+---@return table
+function Object.getTable(name) end
 
 ---
 --- If the object is a bag, deck or stack, returns the number of objects within, otherwise -1.
@@ -643,6 +716,13 @@ function Object.setScale(scale) end
 ---@see tts__Object#getSnapPoints
 function Object.setSnapPoints(snapPoints) end
 
+---@param state number
+function Object.setState(state) end
+
+---@param name string @Name of the table.
+---@param tab table
+function Object.setTable(name, tab) end
+
 ---
 --- Sets the object's rotation to the specified orientation, provided as a vector of Euler angles.
 ---
@@ -687,7 +767,6 @@ function Object.setVar(name, value) end
 ---@return true
 ---@see tts__Object#getVectorLines
 function Object.setVectorLines(lines) end
-
 
 ---@return boolean
 function Object.shuffle() end

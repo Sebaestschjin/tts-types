@@ -124,6 +124,16 @@
 ---@field FogSeethrough nil | boolean
 ---@field FogReverseHiding nil | boolean
 ---@field vector nil | tts__CharVectorShape
+---@field AttachedDecals nil | tts__ObjectState_Decal[]
+
+---@shape tts__ObjectState_Decal
+---@field Transform tts__ObjectState_Transform
+---@field CustomDecal tts__ObjectState_CustomDecal
+
+---@shape tts__ObjectState_CustomDecal
+---@field Name string
+---@field ImageURL string
+---@field Size nil | number
 
 ---@shape tts__ContainerState : tts__ObjectState
 ---@field ContainedObjects tts__ObjectState[]

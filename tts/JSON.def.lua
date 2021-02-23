@@ -27,8 +27,9 @@ function JSON.decode(text) end
 ---@return string
 function JSON.encode(value, etc, options) end
 
+---@overload fun(value: table | string | number | boolean)
 ---@param value table | string | number | boolean
 ---@param etc any @Unused
----@param options tts__JSON__EncodeOptions
+---@param options tts__JSON__EncodeOptions'0=pl,
 ---@return string
 function JSON.encode_pretty(value, etc, options) end
