@@ -663,6 +663,23 @@ function Object.scale(scale) end
 ---@field rotation nil | tts__VectorShape @Default Vector(0, 0, 0)
 ---@field scale nil | tts__VectorShape @Default Vector(1, 1, 1)
 
+
+---@shape tts__Object_DeckCustomObject_CustomDeck_In
+---@field face string
+---@field back string
+---@field unique_back nil | boolean @Defaults to false
+---@field width nil | number @Defaults to 10
+---@field height nil | number @Defaults to 7
+---@field number nil | number @Defaults to 52
+---@field sideways nil | boolean @Defaults to false
+---@field back_is_hidden nil | boolean @Defaults to false
+---@field type nil | tts__CardType @Defaults to 0
+
+---@alias tts__Object_CustomObject_In tts__Object_DeckCustomObject_CustomDeck_In
+
+---@param parameters tts__Object_CustomObject_In
+function Object.setCustomObject(parameters) end
+
 ---
 --- Removes all existing decals, replacing them with a decal per entry in the provided decal parameters array.
 ---
