@@ -181,6 +181,9 @@ local Token
 ---@return true @Technically, returns false if your `callback` param is nil. However, Luanalysis won't allow you to make that mistake.
 function Object.addContextMenuItem(label, callback, keepOpen) end
 
+---@param name string
+function Object.addTag(name) end
+
 ---@overload fun(functionName: string): any
 ---@param functionName string
 ---@param functionParameters table | number | string | boolean
@@ -689,6 +692,9 @@ function Object.setCustomObject(parameters) end
 ---@return boolean
 function Object.setDecals(decals) end
 
+---@param description string
+function Object.setDescription(description) end
+
 ---
 --- Sets whether the object is locked/frozen in place.
 ---
@@ -895,6 +901,11 @@ end
 
 ---@return tts__Object[]
 function getObjects()
+end
+
+---@param tag string
+---@return tts__Object[]
+function getObjectsWithTag(tag)
 end
 
 ---@class tts__Global : tts__Object
