@@ -746,6 +746,10 @@ function Object.setState(state) end
 ---@param tab table
 function Object.setTable(name, tab) end
 
+--- Replaces all tags on the object with those contained in the specified table
+---@param tags string[]
+function Object.setTags(tags) end
+
 ---
 --- Sets the object's rotation to the specified orientation, provided as a vector of Euler angles.
 ---

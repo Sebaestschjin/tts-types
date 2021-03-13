@@ -149,7 +149,7 @@
 ---@shape tts__CardCustomState : tts__ObjectState
 ---@field Name 'CardCustom'
 ---@field CardID number
----@field CustomDeck table<string, tts__ObjectState_CustomDeck>
+---@field CustomDeck table<number, tts__ObjectState_CustomDeck>
 
 ---@shape tts__BagState : tts__ContainerState
 ---@field Name 'Bag'
@@ -161,7 +161,7 @@
 
 ---@shape tts__DeckCustomState : tts__ContainerState
 ---@field Name 'DeckCustom'
----@field CustomDeck table<string, tts__ObjectState_CustomDeck>
+---@field CustomDeck table<number, tts__ObjectState_CustomDeck>
 ---@field DeckIDs number[] @Despite the name, these are card IDs not deck IDs
 ---@field ContainedObjects tts__ObjectState[]
 
@@ -192,3 +192,49 @@
 ---@shape tts__TokenState : tts__ObjectState
 ---@field Name 'Custom_Token'
 ---@field CustomImage tts__ObjectState_TileCustomImage
+
+---@shape tts__LayoutZoneState : tts__ObjectState
+---@field Name 'LayoutZone'
+---@field LayoutZone tts__LayoutZoneState_L
+
+---@shape tts__LayoutZoneState_L
+---@field Options tts__LayoutZoneState_Options
+
+--- Right/Down | Down/Right | Left/Down | Down/Left | Right/Up | Up/Right | Left/Up | Up/Left
+---@alias tts__LayoutZone_Direction 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7
+
+---Do not Change | Face Up | Face Down | Group is Tipped
+---@alias tts__LayoutZone_Facing 0 | 1 | 2 | 3
+
+---Eastward | Westward | Northward | Southward
+---@alias tts__LayoutZone_GroupDirection 0 | 1 | 2 | 3
+
+--- None | Added Time | Value | Name | Description | GM Notes | Memo
+---@alias tts__LayoutZone_GroupSort 0 | 1 | 2 | 3 | 4 | 5 | 6
+
+---@shape tts__LayoutZoneState_Options
+---@field TriggerForFaceUp boolean
+---@field TriggerForFaceDown boolean
+---@field TriggerForNonCards boolean
+---@field SplitAddedDecks boolean
+---@field CombineIntoDecks boolean
+---@field CardsPerDeck number
+---@field Direction tts__LayoutZone_Direction
+---@field NewObjectFacing tts__LayoutZone_Facing
+---@field HorizontalGroupPadding number
+---@field VerticalGroupPadding number
+---@field StickyCards boolean
+---@field InstantRefill boolean
+---@field Randomize boolean
+---@field ManualOnly boolean
+---@field MeldDirection tts__LayoutZone_GroupDirection
+---@field MeldSort tts__LayoutZone_GroupSort
+---@field MeldReverseSort boolean
+---@field MeldSortExisting boolean
+---@field HorizonalSpread number
+---@field VerticalSpread number
+---@field MaxObjectsPerGroup number
+---@field AlternateDirection boolean
+---@field MaxObjectsPerNewGroup number
+---@field AllowSwapping boolean
+
