@@ -125,6 +125,7 @@
 ---@field FogReverseHiding nil | boolean
 ---@field vector nil | tts__CharVectorShape
 ---@field AttachedDecals nil | tts__ObjectState_Decal[]
+---@field States nil | table<number, tts__ObjectState>
 
 ---@shape tts__ObjectState_Decal
 ---@field Transform tts__ObjectState_Transform
