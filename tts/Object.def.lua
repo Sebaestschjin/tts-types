@@ -740,6 +740,7 @@ function Object.setScale(scale) end
 function Object.setSnapPoints(snapPoints) end
 
 ---@param state number
+---@return tts__Object
 function Object.setState(state) end
 
 ---@param name string @Name of the table.

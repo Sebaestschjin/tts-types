@@ -125,11 +125,16 @@
 ---@field FogReverseHiding nil | boolean
 ---@field vector nil | tts__CharVectorShape
 ---@field AttachedDecals nil | tts__ObjectState_Decal[]
+---@field AttachedSnapPoints nil | tts__ObjectState_SnapPoint[]
 ---@field States nil | table<number, tts__ObjectState>
 
 ---@shape tts__ObjectState_Decal
 ---@field Transform tts__ObjectState_Transform
 ---@field CustomDecal tts__ObjectState_CustomDecal
+
+---@shape tts__ObjectState_SnapPoint
+---@field Position tts__CharVectorShape
+---@field Tags string[]
 
 ---@shape tts__ObjectState_CustomDecal
 ---@field Name string
