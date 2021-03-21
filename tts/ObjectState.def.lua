@@ -127,6 +127,7 @@
 ---@field AttachedDecals nil | tts__ObjectState_Decal[]
 ---@field AttachedSnapPoints nil | tts__ObjectState_SnapPoint[]
 ---@field States nil | table<number, tts__ObjectState>
+---@field Tags nil | string[]
 
 ---@shape tts__ObjectState_Decal
 ---@field Transform tts__ObjectState_Transform
