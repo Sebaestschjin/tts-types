@@ -646,11 +646,17 @@ function Object.isSmoothMoving() end
 ---@param object tts__Object
 ---@param parameters tts__JointParameters
 ---@return boolean
-function Object.jointTo(object, parameters) end
+function Object.jointTo(object, parameters)
+end
+
+---@return tts__Object
+function Object.reload()
+end
 
 ---@param index number @button index for this object, starting at 0
 ---@return boolean
-function Object.removeButton(index) end
+function Object.removeButton(index)
+end
 ---
 --- Scales the object by the specified multiplier(s), relative to the object's existing scale.
 ---
