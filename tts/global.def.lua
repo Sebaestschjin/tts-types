@@ -57,7 +57,7 @@ function logString(value, label, tag, concise, displayTag) end
 
 ---@overload fun(message: string): boolean
 ---@param message string
----@param color tts__ColorShape
+---@param color tts__ColorShape | tts__ColorName
 ---@return boolean
 function printToAll(message, color) end
 
