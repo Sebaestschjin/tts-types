@@ -184,10 +184,10 @@ function Object.addContextMenuItem(label, callback, keepOpen) end
 ---@param name string
 function Object.addTag(name) end
 
----@overload fun(functionName: string): any
+---@overload fun(functionName: string): any...
 ---@param functionName string
 ---@param functionParameters table | number | string | boolean
----@return any
+---@return any...
 function Object.call(functionName, functionParameters) end
 
 ---@return true
@@ -291,6 +291,8 @@ function Object.editButton(parameters) end
 ---@param parameters tts__EditInputParameters
 ---@return boolean
 function Object.editInput(parameters) end
+
+function Object.flip() end
 
 ---
 --- Returns the object's angular velocity, in radians per second.

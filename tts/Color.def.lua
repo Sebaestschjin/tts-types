@@ -10,8 +10,9 @@
 ---@field [3] number
 ---@field [4] nil | number
 
----@alias tts__ColorName 'Blue' | 'Green' | 'Red' | 'Yellow'
+---@alias tts__ColorName 'Blue' | 'Green' | 'Red' | 'Yellow' | 'White'
 ---@alias tts__ColorShape tts__CharColorShape | tts__NumColorShape
+---@alias tts__ColorParamemeter tts__ColorShape | tts__ColorName
 
 ---@class tts__Color
 ---@overload fun(src: tts__Color): tts__Color

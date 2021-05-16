@@ -20,7 +20,7 @@ function clearContextMenu() end
 
 ---@overload fun(message: string): boolean
 ---@param message string
----@param color string
+---@param color tts__ColorParamemeter
 ---@return boolean
 function broadcastToAll(message, color) end
 
