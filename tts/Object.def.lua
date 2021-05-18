@@ -27,6 +27,7 @@
 
 ---@class tts__Object
 ---@field angular_drag number
+---@field AssetBundle tts__AssetBundle  @[Read only]
 ---@field auto_raise boolean
 ---@field bounciness number
 ---@field drag number
@@ -43,7 +44,8 @@
 ---@field locked boolean
 ---@field mass number
 ---@field max_typed_number number
----@field name string @[Read only] Internal resource name for this Object. Typically only useful for spawnObjectJSON(). Generally, you want getName() instead.
+---@field memo nil | string
+---@field name string @[Read only] Internal resource name for this Object. Typically only useful for spawnObjectData()/spawnObjectJSON(). Generally, you want getName() instead.
 ---@field pick_up_position tts__Vector @[Read only]
 ---@field pick_up_rotation tts__Vector @[Read only]
 ---@field remainder nil | tts__Object @[Read only]
@@ -53,7 +55,7 @@
 ---@field spawning boolean
 ---@field static_friction number
 ---@field sticky boolean
----@field tag tts__ObjectType @An identifier indicating the type of Tabletop Simulator object. [Read only]
+---@field tag tts__ObjectType @Deprecated: Use type. An identifier indicating the type of Tabletop Simulator object. [Read only]
 ---@field type tts__ObjectType @An identifier indicating the type of Tabletop Simulator object. [Read only]
 ---@field tooltip boolean
 ---@field UI tts__UI @[Read only]
@@ -68,6 +70,7 @@ local Object
 
 --- The following are not real types in TTS, but this allows us to strongly type our code where an object of a specific type is required.
 --- NOTE: There is no tts__AssetBundle or tts__Model, because these objects always masquerade as another object type.
+
 
 ---@class tts__Container : tts__Object
 local Container
@@ -112,6 +115,16 @@ local DeckCustom
 
 ---@class tts__DieCustom : tts__Die
 local DieCustom
+
+---@class Hand : tts__Object
+local Hand
+
+---@return tts__PlayerHandColor
+function Hand.getValue() end
+
+---@param newValue tts__PlayerHandColor
+---@return boolean
+function Hand.setValue(newValue)  end
 
 ---@class tts__Domino : tts__Object
 
@@ -173,6 +186,9 @@ local Token
 
 ---@alias tts__Object_DealDestination tts__PlayerHandColor | "All" | "Seated"
 
+---@param object tts__Object
+---@return boolean
+function Object.addAttachment(object) end
 
 ---@overload fun(label: string, callback: (fun(playerColor: tts__PlayerHandColor): void)): true
 ---@param label string @Text for the menu item.
@@ -292,12 +308,16 @@ function Object.editButton(parameters) end
 ---@return boolean
 function Object.editInput(parameters) end
 
+---@return boolean
 function Object.flip() end
 
 ---
 --- Returns the object's angular velocity, in radians per second.
 ---@return tts__Vector
 function Object.getAngularVelocity() end
+
+---@return tts__IndexedSimpleObjectState[]
+function Object.getAttachments() end
 
 ---@shape tts__Bounds
 ---@field center tts__Vector
@@ -456,6 +476,9 @@ function Object.getDecals() end
 ---@return string @Description, also shows as part of Object's tooltip.
 function Object.getDescription() end
 
+---@return string
+function Object.getGMNotes() end
+
 ---
 --- Object's unique identifier.
 ---@return string
@@ -511,6 +534,7 @@ function Object.getName() end
 ---@field guid string
 ---@field lua_script nil | string
 ---@field lua_script_state nil | string
+---@field memo nil | string
 
 ---@shape tts__IndexedSimpleObjectState : tts__SimpleObjectState
 ---@field index number
@@ -527,6 +551,12 @@ function Container.getObjects() end
 ---@return tts__Object[]
 function ScriptingTrigger.getObjects() end
 
+--- Combines 2 combinable objects to form a new container (Deck, Stat, etc)
+---
+---@param object tts__Object
+---@return self
+function Object.putObject(object) end
+
 --- Places an object into a container.
 ---
 ---@param object tts__Object
@@ -541,9 +571,17 @@ function Stackable.putObject(object) end
 
 --- Places an card onto another card, forming a deck.
 ---
+---@param object tts__Card|tts__Deck
+---@return tts__Deck
+function Card.putObject(object) end
+
 ---@param object tts__Card
 ---@return tts__Deck
 function Card.putObject(object) end
+
+---@param index number
+---@return tts__Object
+function Object.removeAttachment(index) end
 
 ---
 --- Returns the object's position.
@@ -606,6 +644,9 @@ function Object.getTable(name) end
 ---@return number
 function Object.getQuantity() end
 
+---@return any
+function Object.getValue() end
+
 ---@param name string
 ---@return any
 function Object.getVar(name) end
@@ -655,10 +696,16 @@ end
 function Object.reload()
 end
 
+--- Randomizes the object i.e. rolls a die, shuffles a deck, reorders a bag, or in the case of objects consisting of multiple states, randomly selects a state.
+---@overload fun(): void
+---@param playerColor tts__PlayerColor
+---@return boolean
+function Object.randomize(playerColor) end
+
 ---@param index number @button index for this object, starting at 0
 ---@return boolean
-function Object.removeButton(index)
-end
+function Object.removeButton(index) end
+
 ---
 --- Scales the object by the specified multiplier(s), relative to the object's existing scale.
 ---
@@ -674,6 +721,9 @@ function Object.scale(scale) end
 ---@field rotation nil | tts__VectorShape @Default Vector(0, 0, 0)
 ---@field scale nil | tts__VectorShape @Default Vector(1, 1, 1)
 
+---@param color tts__ColorShape
+---@return boolean
+function Object.setColorTint(color) end
 
 ---@shape tts__Object_DeckCustomObject_CustomDeck_In
 ---@field face string
@@ -701,7 +751,12 @@ function Object.setCustomObject(parameters) end
 function Object.setDecals(decals) end
 
 ---@param description string
+---@return true
 function Object.setDescription(description) end
+
+---@param colors tts__PlayerColor[]
+---@return boolean
+function Object.setInvisibleTo(colors) end
 
 ---
 --- Sets whether the object is locked/frozen in place.
@@ -786,6 +841,10 @@ function Object.setRotationSmooth(rotation, collide, fast) end
 ---@return true
 ---@see tts__Object#getRotationValues
 function Object.setRotationValue(value) end
+
+---@param newValue string
+---@return any
+function Object.setValue(newValue) end
 
 ---@param name string
 ---@param value any
