@@ -11,10 +11,12 @@ UI = {}
 ---@alias tts__UILayoutElement_Tag "HorizontalLayout" | "VerticalLayout" | "TableLayout" | "Panel" | "VerticalScrollView"
 ---@alias tts__UIElement_Tag  "Defaults" | tts__UILayoutElement_Tag
 ---@alias tts__UILayoutElement tts__UIHorizontalLayoutElement | tts__UIVerticalLayoutElement
----@alias tts__UIElement tts__UIDefaultsElement | tts__UILayoutElement | tts__UIButtonElement | tts__UIPanelElement | tts__UITextElement | tts__UIDropdownElement | tts__UIOptionElement | tts__UIImageElement | tts__UIToggleElement | tts__UIToggleButtonElement | tts__UIToggleGroupElement
+---@alias tts__UIElement tts__UIDefaultsElement | tts__UILayoutElement | tts__UIGridLayoutElement | tts__UIButtonElement | tts__UIPanelElement | tts__UITextElement | tts__UIDropdownElement | tts__UIOptionElement | tts__UIImageElement | tts__UIToggleElement | tts__UIToggleButtonElement | tts__UIToggleGroupElement
 
 
 ---@alias tts__UIElement_Alignment "UpperLeft" | "UpperCenter" | "UpperRight" | "MiddleLeft" | "MiddleCenter" | "MiddleRight" | "LowerLeft" | "LowerCenter" | "LowerRight"
+---@alias tts__UIElement_Alignment_Axis "Horizontal" | "Vertical"
+---@alias tts__UIElement_Alignment_Corner "UpperLeft" | "UpperRight" | "LowerLeft" | "LowerRight"
 ---@alias tts__UIElement_Boolean boolean | "true" | "false" | "1" | "0" | 1 | 0
 ---@alias tts__UIElement_Color string
 ---@alias tts__UIElement_ColorBlock string
@@ -28,6 +30,7 @@ UI = {}
 ---@alias tts__UIElement_Percentage string
 ---@alias tts__UIElement_Vector2 string
 ---@alias tts__UIElement_Vector3 string
+---@alias tts__UIElement_PlayerColors string @Pipe separated list of PlayerColors
 
 ---@alias tts__UIElement_HideAnimation "None" | "Shrink" | "FadeOut" | "SlideOut_Left" | "SlideOut_Right" | "SlideOut_Top" | "SlideOut_Bottom"
 ---@alias tts__UIElement_ShowAnimation "None" | "Grow" | "FadeIn" | "SlideIn_Left" | "SlideIn_Right" | "SlideIn_Top" | "SlideIn_Bottom"
@@ -90,6 +93,9 @@ UI = {}
 ---@field selectOnDown nil | tts__UIElement_Id
 ---@field selectOnLeft nil | tts__UIElement_Id
 ---@field selectOnRight nil | tts__UIElement_Id
+---@field tooltip nil | string
+---@field tooltipBackgroundColor nil | tts__UIElement_Color
+---@field visibility nil | tts__UIElement_PlayerColors
 
 ---@shape tts__UIElementBase<Child : tts__UIElement>
 ---@field attributes nil | tts__UIElementBase_Attributes
@@ -253,6 +259,22 @@ UI = {}
 ---@shape tts__UIVerticalLayoutElement : tts__UIElementBase<tts__UIElement>
 ---@field tag "VerticalLayout"
 ---@field attributes nil | tts__UIVerticalLayoutElement_Attributes
+
+---@alias tts__UIGridLayoutElement_Constraint "Flexible" | "FixedColumnCount" | "FixedRowCount"
+
+---@shape tts__UIGridLayoutElement_Attributes : tts__UIElementBase_Attributes
+---@field padding nil | tts__UIElement_Padding @Default "0 0 0 0"
+---@field spacing nil | tts__UIElement_Vector2 @Default "0 0"
+---@field cellSize nil | tts__UIElement_Vector2 @Default "100 100"
+---@field startCorner nil | tts__UIElement_Alignment_Corner @Default "UpperLeft"
+---@field startAxis nil | tts__UIElement_Alignment_Axis @Default "Horizontal"
+---@field childAlignment nil | tts__UIElement_Alignment @Default "UpperLeft"
+---@field constraint nil | tts__UIGridLayoutElement_Constraint @Default "Flexible"
+---@field constraintCount nil | tts__UIElement_Number @Default 2
+
+---@shape tts__UIGridLayoutElement : tts__UIElementBase<tts__UIElement>
+---@field tag "GridLayout"
+---@field attributes nil | tts__UIGridLayoutElement_Attributes
 
 ---@param id tts__UIElement_Id
 ---@param name string
