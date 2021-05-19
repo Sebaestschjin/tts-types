@@ -11,7 +11,7 @@ UI = {}
 ---@alias tts__UILayoutElement_Tag "HorizontalLayout" | "VerticalLayout" | "TableLayout" | "Panel" | "VerticalScrollView"
 ---@alias tts__UIElement_Tag  "Defaults" | tts__UILayoutElement_Tag
 ---@alias tts__UILayoutElement tts__UIHorizontalLayoutElement | tts__UIVerticalLayoutElement
----@alias tts__UIElement tts__UIDefaultsElement | tts__UILayoutElement | tts__UIGridLayoutElement | tts__UIButtonElement | tts__UIPanelElement | tts__UITextElement | tts__UIDropdownElement | tts__UIOptionElement | tts__UIImageElement | tts__UIToggleElement | tts__UIToggleButtonElement | tts__UIToggleGroupElement
+---@alias tts__UIElement tts__UIDefaultsElement | tts__UILayoutElement | tts__UIGridLayoutElement | tts__UIButtonElement | tts__UIPanelElement | tts__UITextElement | tts__UIDropdownElement | tts__UIOptionElement | tts__UIImageElement | tts__UIToggleElement | tts__UIToggleButtonElement | tts__UIToggleGroupElement | tts__UIInputFieldElement | tts__UIProgressBarElement | tts__UISliderElement
 
 
 ---@alias tts__UIElement_Alignment "UpperLeft" | "UpperCenter" | "UpperRight" | "MiddleLeft" | "MiddleCenter" | "MiddleRight" | "LowerLeft" | "LowerCenter" | "LowerRight"
@@ -106,6 +106,24 @@ UI = {}
 
 ---@shape tts__UIInputElementBase<Child : tts__UIElement> : tts__UIElementBase<Child>
 ---@field attributes nil | tts__UIInputElementBase_Attributes
+
+---@shape tts__UIInputFieldElement_Attributes : tts__UIInputElementBase_Attributes
+
+---@shape tts__UIInputFieldElement : tts__UIInputElementBase<tts__UIElement>
+---@field tag "InputField"
+---@field attributes nil | tts__UIInputFieldElement_Attributes
+
+---@shape tts__UIProgressBarElement_Attributes : tts__UIElementBase_Attributes
+
+---@shape tts__UIProgressBarElement : tts__UIElementBase<tts__UIElement>
+---@field tag "ProgressBar"
+---@field attributes nil | tts__UIProgressBarElement_Attributes
+
+---@shape tts__UISliderElement_Attributes : tts__UIInputElementBase_Attributes
+
+---@shape tts__UISliderElement : tts__UIInputElementBase<tts__UIElement>
+---@field tag "Slider"
+---@field attributes nil | tts__UISliderElement_Attributes
 
 ---@alias tts__UIButtonElement_Transition "None" | "ColorTint" | "SpriteSwap" | "Animation"
 
