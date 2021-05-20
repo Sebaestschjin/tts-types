@@ -692,6 +692,8 @@ function Object.isSmoothMoving() end
 function Object.jointTo(object, parameters)
 end
 
+function Object.lock() end
+
 ---@return tts__Object
 function Object.reload()
 end
@@ -865,6 +867,8 @@ function Object.setVectorLines(lines) end
 
 ---@return boolean
 function Object.shuffle() end
+
+function Object.unlock() end
 
 ---
 --- Returns a world coordinate position corresponding with local coordinate position.
