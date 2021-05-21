@@ -124,7 +124,7 @@ function Hand.getValue() end
 
 ---@param newValue tts__PlayerHandColor
 ---@return boolean
-function Hand.setValue(newValue)  end
+function Hand.setValue(newValue) end
 
 ---@class tts__Domino : tts__Object
 
@@ -197,9 +197,6 @@ function Object.addAttachment(object) end
 ---@return true @Technically, returns false if your `callback` param is nil. However, Luanalysis won't allow you to make that mistake.
 function Object.addContextMenuItem(label, callback, keepOpen) end
 
----@param name string
-function Object.addTag(name) end
-
 ---@overload fun(functionName: string): any...
 ---@param functionName string
 ---@param functionParameters table | number | string | boolean
@@ -211,7 +208,7 @@ function Object.clearContextMenu() end
 
 ---@shape tts__ButtonParameters
 ---@field click_function string @A String of the function's name that will be run when button is clicked.
----@field function_owner nil | string | tts__Self @The Object which contains the click_function function. Defaults to Global>
+---@field function_owner nil | string | tts__Self | tts__Object @The Object which contains the click_function function. Defaults to Global>
 ---@field label nil | string @Text that appears on the button. Defaults to ''.
 ---@field position nil | tts__VectorShape @Where the button appears, relative to the Object's center.
 ---@field rotation nil | tts__VectorShape @How the button is rotated, relative to the Object's rotation. Defaults to {x=0, y=0, z=0}.
@@ -812,9 +809,33 @@ function Object.setState(state) end
 ---@param tab table
 function Object.setTable(name, tab) end
 
+---@alias tts__Object_Tag string
+
+---@param tag tts__Object_Tag
+---@return boolean
+function Object.addTag(tag) end
+
 --- Replaces all tags on the object with those contained in the specified table
----@param tags string[]
+---@param tags tts__Object_Tag[]
 function Object.setTags(tags) end
+
+---@param tag tts__Object_Tag
+---@return boolean
+function Object.removeTag(tag) end
+
+---@return tts__Object_Tag[]
+function Object.getTags() end
+
+---@return boolean
+function Object.hasAnyTag() end
+
+---@param other tts__Object
+---@return boolean
+function Object.hasMatchingTag(other) end
+
+---@param tag tts__Object_Tag
+---@return boolean
+function Object.hasTag(tag) end
 
 ---
 --- Sets the object's rotation to the specified orientation, provided as a vector of Euler angles.
