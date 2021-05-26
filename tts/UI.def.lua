@@ -8,8 +8,8 @@ UI = {}
 ---@field url string
 
 
----@alias tts__UILayoutElement_Tag "HorizontalLayout" | "VerticalLayout" | "TableLayout" | "Panel" | "VerticalScrollView"
----@alias tts__UIElement_Tag  "Defaults" | tts__UILayoutElement_Tag
+---@alias tts__UILayoutElement_Tag "HorizontalLayout" | "VerticalLayout" | "TableLayout" | "Panel" | "VerticalScrollView" | "GridLayout"|
+---@alias tts__UIElement_Tag  "Defaults" | tts__UILayoutElement_Tag | "Button" | "Image" | "Option" | "Text" | "Toggle"
 ---@alias tts__UILayoutElement tts__UIHorizontalLayoutElement | tts__UIVerticalLayoutElement
 ---@alias tts__UIElement tts__UIDefaultsElement | tts__UILayoutElement | tts__UIGridLayoutElement | tts__UIButtonElement | tts__UIPanelElement | tts__UITextElement | tts__UIDropdownElement | tts__UIOptionElement | tts__UIImageElement | tts__UIToggleElement | tts__UIToggleButtonElement | tts__UIToggleGroupElement | tts__UIInputFieldElement | tts__UIProgressBarElement | tts__UISliderElement
 
@@ -223,8 +223,12 @@ UI = {}
 
 ---@shape tts__UITableLayoutElement : tts__UIElementBase<tts__UIElement>
 
+---@shape tts__UIToggleElement_Attributes : tts__UIElementBase_Attributes
+---@field onValueChanged nil | tts__UIElement_CallbackFunctionName
+
 ---@shape tts__UIToggleElement : tts__UIElementBase<tts__UIElement>
 ---@field tag "Toggle"
+---@field attributes tts__UIToggleElement_Attributes
 
 ---@shape tts__UIToggleButtonElement : tts__UIInputElementBase<tts__UIElement>
 ---@field tag "ToggleButton"
