@@ -8,10 +8,10 @@ UI = {}
 ---@field url string
 
 
----@alias tts__UILayoutElement_Tag "HorizontalLayout" | "VerticalLayout" | "TableLayout" | "Panel" | "VerticalScrollView" | "GridLayout"|
----@alias tts__UIElement_Tag  "Defaults" | tts__UILayoutElement_Tag | "Button" | "Image" | "Option" | "Text" | "Toggle"
+---@alias tts__UILayoutElement_Tag "HorizontalLayout" | "VerticalLayout" | "TableLayout" | "Panel" | "VerticalScrollView" | "GridLayout"
+---@alias tts__UIElement_Tag  "Defaults" | tts__UILayoutElement_Tag | "Button" | "Cell" | "Image" | "Option" | "Row" | "Text" | "Toggle"
 ---@alias tts__UILayoutElement tts__UIHorizontalLayoutElement | tts__UIVerticalLayoutElement
----@alias tts__UIElement tts__UIDefaultsElement | tts__UILayoutElement | tts__UIGridLayoutElement | tts__UIButtonElement | tts__UIPanelElement | tts__UITextElement | tts__UIDropdownElement | tts__UIOptionElement | tts__UIImageElement | tts__UIToggleElement | tts__UIToggleButtonElement | tts__UIToggleGroupElement | tts__UIInputFieldElement | tts__UIProgressBarElement | tts__UISliderElement
+---@alias tts__UIElement tts__UIDefaultsElement | tts__UILayoutElement | tts__UIGridLayoutElement | tts__UIButtonElement | tts__UIPanelElement | tts__UITextElement | tts__UIDropdownElement | tts__UIOptionElement | tts__UIImageElement | tts__UIToggleElement | tts__UIToggleButtonElement | tts__UIToggleGroupElement | tts__UIInputFieldElement | tts__UIProgressBarElement | tts__UISliderElement | tts__UITableLayoutElement | tts__UIRowElement | tts__UICellElement
 
 
 ---@alias tts__UIElement_Alignment "UpperLeft" | "UpperCenter" | "UpperRight" | "MiddleLeft" | "MiddleCenter" | "MiddleRight" | "LowerLeft" | "LowerCenter" | "LowerRight"
