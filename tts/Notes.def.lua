@@ -36,3 +36,11 @@ function Notes.editNotebookTab(parameters) end
 ---@param index number Index for the tab to remove.
 ---@return boolean
 function Notes.removeNotebookTab(index) end
+
+--- Returns the contents of the on-screen notes section.
+---@return string
+function Notes.getNotes() end
+
+--- Replace the text in the notes window with the string
+---@param notes string
+function Notes.setNotes(notes) end
