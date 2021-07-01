@@ -35,6 +35,7 @@ UI = {}
 ---@alias tts__UIElement_HideAnimation "None" | "Shrink" | "FadeOut" | "SlideOut_Left" | "SlideOut_Right" | "SlideOut_Top" | "SlideOut_Bottom"
 ---@alias tts__UIElement_ShowAnimation "None" | "Grow" | "FadeIn" | "SlideIn_Left" | "SlideIn_Right" | "SlideIn_Top" | "SlideIn_Bottom"
 
+---@alias tts__UITooltipPosition "Above" | "Below" | "Left" | "Right"
 
 ---@alias tts__UIElement_CallbackFunction fun(player: tts__Player, value: string, id: nil | string)
 
@@ -94,7 +95,11 @@ UI = {}
 ---@field selectOnLeft nil | tts__UIElement_Id
 ---@field selectOnRight nil | tts__UIElement_Id
 ---@field tooltip nil | string
----@field tooltipBackgroundColor nil | tts__UIElement_Color
+---@field tooltipBackgroundImage nil | tts__UIAssetName
+---@field tooltipBorderColor nil | tts__UIElement_Color
+---@field tooltipBorderImage nil | tts__UIAssetName
+---@field tooltipOffset nil | integer
+---@field tooltipPosition nil | tts__UITooltipPosition
 ---@field visibility nil | tts__UIElement_PlayerColors
 
 ---@shape tts__UIElementBase<Child : tts__UIElement>
